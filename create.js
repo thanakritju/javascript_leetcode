@@ -1,3 +1,5 @@
+// node create.js 75 dailyTemperatures
+
 import { readFile, writeFile, mkdirSync, existsSync } from "fs";
 
 function createProblem(problemId, functionName) {
