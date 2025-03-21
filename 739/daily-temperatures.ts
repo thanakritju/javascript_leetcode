@@ -1,15 +1,13 @@
 export function dailyTemperatures(temperatures: number[]): number[] {
-  const predictions = [];
+  const predictions = new Array(temperatures.length).fill(0);
+  const stack = [];
   for (let i = 0; i < temperatures.length; i++) {
-    for (let j = i + 1; j < temperatures.length; j++) {
-      if (temperatures[i] < temperatures[j]) {
-        predictions.push(j - i);
-        break;
-      }
+    while (stack.length > 0 && stack[stack.length - 1][0] < temperatures[i]) {
+      const poppedTemperature = stack.pop();
+      predictions[poppedTemperature[1]] = i - poppedTemperature[1];
     }
-    if (predictions[i] == undefined) {
-      predictions.push(0);
-    }
+
+    stack.push([temperatures[i], i]);
   }
   return predictions;
 }
